@@ -89,9 +89,11 @@ User authentication is implemented using JWT tokens to ensure secure access to p
 ⚠️ Include this in headers for all protected routes:
 `Authorization: Bearer <your_token_here>`
 
+You can also use the following `curl` commands to do the above activities
+
 **Register Payload:**
 
-  ```json
+```json
   {
     "name": "John Doe",
     "email": "john@example.com",
@@ -99,17 +101,37 @@ User authentication is implemented using JWT tokens to ensure secure access to p
   }
 ```
 
+The corresponding `curl` command:
+
+```bash
+  curl -X POST http://localhost:5000/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "securePassword"
+  }'
+```
 **Login Payload**
-  ```json
+```json
   {
     "email": "alice@example.com",
     "password": "securePassword"
   }
 ```
+The corresponding `curl` command:
+```bash
+  curl -X POST http://localhost:5000/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "securePassword"
+  }'
+```
 
 All protected routes require this header:
 
-  ```
+```
   Authorization: Bearer <token>
 ```
 
@@ -140,9 +162,13 @@ These routes allow users to create, view, update, and delete property listings. 
 
 **Example:**
 
-  ```http
+```http
   GET /properties?location=Delhi&bedrooms=2&rating_gte=4
   GET /properties?rating=4-4.5&location=Chennai
+```
+**Get the Properties (with filters using `curl` command)**
+```bash
+  curl "http://localhost:5000/properties?location=Delhi&priceMin=60000&bedrooms=2"
 ```
 ### 📤 Create Property Example Payload
 When creating a listing, the following format must be used. The body which consists of the details about the property for uploading a property into the database using the `POST` for the `/properties` Endpoint. 
@@ -154,30 +180,44 @@ When creating a listing, the following format must be used. The body which consi
         "city": "Coimbatore",
         "areaSqFt": 4102,
         "bedrooms": 5,
-        "bathrooms": 2,
-        "amenities": [
-            "lift",
-            "clubhouse",
-            "security",
-            "gym",
-            "garden",
-            "pool"
-        ],
-        "availableFrom": "2025-10-14T00:00:00.000Z",
-        "tags": [
-            "gated-community",
-            "corner-plot"
-        ],
-        "colorTheme": "#6ab45e",
-        "rating": 4.7,
-        "isVerified": false,
-        "listingType": "rent",
-        "createdBy": "683b3fcc345667d885ed5653",
-        "__v": 0,
-        "createdAt": "2025-05-31T17:43:41.790Z",
-        "updatedAt": "2025-05-31T17:43:41.790Z"
+       ...
+        "listingType": "rent"
     },
    ```
+Using `curl` command
+```bash
+  curl -X POST http://localhost:5000/properties \
+  -H "Authorization: Bearer <your_token_here>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "2BHK Apartment in Delhi",
+    "location": "Delhi",
+    "price": 75000,
+    "area": 1000,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "available": true,
+    "furnished": false,
+    "type": "apartment"
+  }'
+```
+
+**Update Property**
+```bash
+  curl -X PUT http://localhost:5000/properties/<property_id> \
+  -H "Authorization: Bearer <your_token_here>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "price": 80000
+  }'
+```
+
+**Delete Property**
+```bash
+  curl -X DELETE http://localhost:5000/properties/<property_id> \
+  -H "Authorization: Bearer <your_token_here>"
+```
+---
 
 ### ❤️ Favorites Routes
 Users can bookmark or "favorite" listings they like. This allows quick access to preferred properties and supports all filter options available in `/properties`.
@@ -191,14 +231,36 @@ Users can bookmark or "favorite" listings they like. This allows quick access to
 
 **Add Favorite Example:**
 
-  ```json
+```json
   {
     "propId": "64e6a48c1a23aa5a..."
   }
 ```
+```bash
+  curl -X POST http://localhost:5000/favorites \
+  -H "Authorization: Bearer <your_token_here>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "propertyId": "<property_id>"
+  }'
+```
 
 **Favorites Filtering:**
-All `/properties` filters also apply to `/favorites`.
+All `/properties` filters also apply to `/favorites`. 
+Requires `Authentication: Bearer <token>`
+
+**Get Favorites (with filters)**
+```bash
+  curl -X GET "http://localhost:5000/favorites?priceMax=100000" \
+  -H "Authorization: Bearer <your_token_here>"
+```
+
+**Remove Favorite**
+```bash
+  curl -X DELETE http://localhost:5000/favorites/<favorite_id> \
+  -H "Authorization: Bearer <your_token_here>"
+```
+
 
 ### 📩 Recommendation Routes
 This feature allows users to recommend listings to friends or family who are also registered on the platform. These appear in the "Recommendations Received" section of the receiver’s dashboard. This also allows us to view the recommendations sent as well as received.
@@ -216,6 +278,32 @@ This feature allows users to recommend listings to friends or family who are als
     "to": "jane@example.com",
     "property": "64e6a48c1a23aa5a..."
   }
+```
+
+Note: Only registered users can be sent the recommendations.
+
+```bash
+  curl -X POST http://localhost:5000/recommend \
+  -H "Authorization: Bearer <your_token_here>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "recipientEmail": "friend@example.com",
+    "propertyId": "<property_id>"
+  }'
+```
+
+**View Recommendations Received**
+Shows the recommendations that are sent by other registered users.
+```bash
+  curl -X GET http://localhost:5000/recommendations \
+  -H "Authorization: Bearer <your_token_here>"
+```
+
+**View Sent Recommendations**
+Let's the registered user to view the registrations that are sent to other users via their emails.
+```bash
+  curl -X GET http://localhost:5000/sent-recommendations \
+  -H "Authorization: Bearer <your_token_here>"
 ```
 
 ---
