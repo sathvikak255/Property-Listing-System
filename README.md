@@ -33,13 +33,13 @@ Whether you're building a real estate platform, a rental marketplace, or just le
 ### 📦 Installation
 #### 1. Clone the repository:
 
-```bash
+  ```bash
   git clone https://github.com/sathvikak255/Property-Listing-System.git
   cd Property-Listing-System
 ```
 #### 2. Install dependencies:
 
-```bash
+  ```bash
   npm install -r requirements.txt
 ```
 
@@ -47,7 +47,7 @@ Whether you're building a real estate platform, a rental marketplace, or just le
 
 Create a .env file in the root directory and add the following:
 
-```.env
+  ```.env
   PORT=5000
   MONGODB_URI=your_mongodb_connection_string
   JWT_SECRET=your_jwt_secret
@@ -60,7 +60,7 @@ Use a CSV parser or script to import your dataset into MongoDB. You can either w
 
 Example (Node-based custom script):
 
-```bash
+  ```bash
   ts-node src/utils/seed.ts
 ```
 
@@ -68,7 +68,7 @@ Example (Node-based custom script):
 
 Run the development server using:
 
-```bash
+  ```bash
   npm run dev
 ```
 
@@ -87,7 +87,7 @@ Make requests to http://localhost:5000.
 
 **Register Example:**
 
-```json
+  ```json
   {
     "name": "John Doe",
     "email": "john@example.com",
@@ -96,7 +96,7 @@ Make requests to http://localhost:5000.
 ```
 
 **Login Example**
-```json
+  ```json
   {
     "email": "alice@example.com",
     "password": "securePassword"
@@ -105,8 +105,8 @@ Make requests to http://localhost:5000.
 
 All protected routes require this header:
 
-```
-Authorization: Bearer <token>
+  ```
+  Authorization: Bearer <token>
 ```
 
 ### 🏘️ Property Routes
@@ -135,14 +135,14 @@ Authorization: Bearer <token>
 
 **Example:**
 
-```http
+  ```http
   GET /properties?location=Delhi&priceMin=60000&bedrooms=2
   GET /properties?rating=4-4.5&location=Chennai
 ```
 For posting a property into the website
 
 The body which consists of the details about the property for uploading a property into the database using the `POST` for the `/properties` Endpoint. 
-```json
+  ```json
         "title": "Green sea.",
         "type": "Bungalow",
         "price": 23825834,
@@ -188,7 +188,7 @@ All `/properties` filters also apply to `/favorites`.
 
 **Add Favorite Example:**
 
-```json
+  ```json
   {
     "propId": "64e6a48c1a23aa5a..."
   }
@@ -204,7 +204,7 @@ All `/properties` filters also apply to `/favorites`.
 
 **Recommend Request Body:**
 
-```json
+  ```json
   {
     "to": "jane@example.com",
     "property": "64e6a48c1a23aa5a..."
