@@ -1,10 +1,10 @@
-import User from "../models/User.ts";
-import { redis } from "../config/redis.ts";
-import Property from "../models/Property.ts";
-import { AuthedRequest } from "../middleware/auth.ts";
+import User from "../models/User.js";
+import { redis } from "../config/redis.js";
+import Property from "../models/Property.js";
+import { AuthedRequest } from "../middleware/auth.js";
 import { Response } from "express";
 import { Types } from "mongoose";
-import Favorite from "../models/Favorite.ts";
+import Favorite from "../models/Favorite.js";
 import mongoose from "mongoose";
 
 export const addFavorite = async (req: AuthedRequest, res: Response): Promise<void> => {
