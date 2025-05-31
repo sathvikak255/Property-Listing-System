@@ -9,7 +9,7 @@
     "dev": "node --loader ts-node/esm src/index.ts",
     "build": "tsc && tsc-alias && cp dataset.csv dist\\",
     "start": "node dist/index.js",
-    "seed": "node dist/utils/seed.js",
+    "seed": "ts-node src/utils/seed.ts",
     "postinstall": "npm run seed"
   },
   "keywords": [],
