@@ -11,6 +11,11 @@ import { router } from "./routes/index.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.redirect("/properties");
+});
+
 app.use("/", router);
 
 const start = async () => {
