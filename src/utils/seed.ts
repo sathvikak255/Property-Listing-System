@@ -7,16 +7,17 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 (async () => {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
+    // const __filename = fileURLToPath(import.meta.url);
+    // const __dirname = dirname(__filename);
 
-    // This assumes dataset.csv is in the same dist directory level as utils/
-    const csvFilePath = path.resolve(__dirname, "../dataset.csv");
+    // // This assumes dataset.csv is in the same dist directory level as utils/
+    // const csvFilePath = path.resolve(__dirname, "../dataset.csv");
+    
     try {
         await connectDB();
         console.log("MongoDB connected");
 
-        const jsonArray = await csv().fromFile(csvFilePath);
+        const jsonArray = await csv().fromFile('dataset.csv');
 
         const formatted = jsonArray.map((r: any) => ({
             title: r.title,
