@@ -1,8 +1,12 @@
 # 🏠 Property Listing System
 
-The **Property Listing System** is a secure, efficient, and feature-rich backend service designed to manage real estate listings and user interactions. Built using **Node.js**, **TypeScript**, **MongoDB**, and **Redis**, it supports full **CRUD operations**, **advanced search filters (including range queries)**, **user authentication**, **favorites management**, and a **recommendation system** between registered users.
+The Property Listing System is a full-featured backend service built to manage real estate listings and user interactions in a scalable and secure way. It allows users to register and log in, post property listings, and search through real estate data using detailed filters like location, price, size, and amenities.
 
-This project is ideal for powering a real estate portal, rental platform, or as a learning base for building scalable backend APIs.
+Users can also save their favorite properties, recommend listings to other registered users, and benefit from faster performance via Redis caching. The system is designed for modern web and mobile applications that require a fast, RESTful backend with user-centric features.
+
+Built using Node.js and TypeScript, this backend system leverages MongoDB for storage, Redis for caching, and is structured with modular controllers and routes for scalability and maintainability.
+
+Whether you're building a real estate platform, a rental marketplace, or just learning backend development with real-world use cases — this project is a great starting point.
 
 ---
 
