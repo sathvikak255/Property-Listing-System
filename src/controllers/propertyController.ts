@@ -1,7 +1,7 @@
-import Property from "../models/Property.ts";
-import { AuthedRequest } from "../middleware/auth.ts";
+import Property from "../models/Property.js";
+import { AuthedRequest } from "../middleware/auth.js";
 import { Response } from "express";
-import { redis } from "../config/redis.ts";
+import { redis } from "../config/redis.js";
 
 export const list = async (req: AuthedRequest, res: Response): Promise<void> => {
     const key = JSON.stringify(req.query);
