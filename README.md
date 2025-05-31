@@ -34,13 +34,13 @@ Whether you're building a real estate platform, a rental marketplace, or just le
 #### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/sathvikak255/Property-Listing-System.git
-cd Property-Listing-System
+  git clone https://github.com/sathvikak255/Property-Listing-System.git
+  cd Property-Listing-System
 ```
 #### 2. Install dependencies:
 
 ```bash
-npm install -r requirements.txt
+  npm install -r requirements.txt
 ```
 
 #### 3. Set up environment variables:
@@ -48,10 +48,10 @@ npm install -r requirements.txt
 Create a .env file in the root directory and add the following:
 
 ```.env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-REDIS_URL=your_redis_connection_string
+  PORT=5000
+  MONGODB_URI=your_mongodb_connection_string
+  JWT_SECRET=your_jwt_secret
+  REDIS_URL=your_redis_connection_string
 ```
 
 #### 4. Import CSV Data into MongoDB
@@ -61,7 +61,7 @@ Use a CSV parser or script to import your dataset into MongoDB. You can either w
 Example (Node-based custom script):
 
 ```bash
-ts-node src/utils/seed.ts
+  ts-node src/utils/seed.ts
 ```
 
 #### 5. Start Development Server
@@ -69,33 +69,10 @@ ts-node src/utils/seed.ts
 Run the development server using:
 
 ```bash
-npm run dev
+  npm run dev
 ```
 
 Make requests to http://localhost:5000.
-
----
-
-## 📂 Project Structure
-
-```
-├── controllers/
-│   ├── authController.js
-│   ├── propertyController.js
-│   ├── favoriteController.js
-│   └── recommendationController.js
-├── middleware/
-│   └── auth.js
-├── models/
-│   ├── User.js
-│   ├── Property.js
-│   └── Favorite.js
-├── routes/
-│   └── index.js
-├── utils/
-│   └── seed.js
-└── index.js
-```
 
 ---
 
@@ -111,19 +88,19 @@ Make requests to http://localhost:5000.
 **Register Example:**
 
 ```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securePassword"
-}
+  {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "securePassword"
+  }
 ```
 
 **Login Example**
 ```json
-{
-  "email": "alice@example.com",
-  "password": "securePassword"
-}
+  {
+    "email": "alice@example.com",
+    "password": "securePassword"
+  }
 ```
 
 All protected routes require this header:
@@ -159,8 +136,8 @@ Authorization: Bearer <token>
 **Example:**
 
 ```http
-GET /properties?location=Delhi&priceMin=60000&bedrooms=2
-GET /properties?rating=4-4.5&location=Chennai
+  GET /properties?location=Delhi&priceMin=60000&bedrooms=2
+  GET /properties?rating=4-4.5&location=Chennai
 ```
 For posting a property into the website
 
@@ -212,9 +189,9 @@ All `/properties` filters also apply to `/favorites`.
 **Add Favorite Example:**
 
 ```json
-{
-  "propId": "64e6a48c1a23aa5a..."
-}
+  {
+    "propId": "64e6a48c1a23aa5a..."
+  }
 ```
 
 ### 📩 Recommendation Routes
@@ -228,10 +205,10 @@ All `/properties` filters also apply to `/favorites`.
 **Recommend Request Body:**
 
 ```json
-{
-  "to": "jane@example.com",
-  "property": "64e6a48c1a23aa5a..."
-}
+  {
+    "to": "jane@example.com",
+    "property": "64e6a48c1a23aa5a..."
+  }
 ```
 
 Recommendations are saved to the receiver's profile in a "Recommendations Received" section.
