@@ -1,6 +1,6 @@
-import User from "../models/User.ts";
-import Property from "../models/Property.ts";
-import { AuthedRequest } from "../middleware/auth.ts";
+import User from "../models/User.js";
+import Property from "../models/Property.js";
+import { AuthedRequest } from "../middleware/auth.js";
 import { Response } from "express";
 import { Types } from "mongoose";
 
