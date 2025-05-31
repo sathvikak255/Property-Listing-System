@@ -89,9 +89,8 @@ Make requests to http://localhost:5000.
 ├── routes/
 │   └── index.js
 ├── utils/
-│   └── cache.js
-├── app.js
-└── server.js
+│   └── seed.js
+└── index.js
 ```
 
 ---
@@ -111,6 +110,14 @@ Make requests to http://localhost:5000.
 {
   "name": "John Doe",
   "email": "john@example.com",
+  "password": "securePassword"
+}
+```
+
+**Login Example**
+```json
+{
+  "email": "alice@example.com",
   "password": "securePassword"
 }
 ```
@@ -149,7 +156,43 @@ Authorization: Bearer <token>
 
 ```http
 GET /properties?location=Delhi&priceMin=60000&bedrooms=2
+GET /properties?rating=4-4.5&location=Chennai
 ```
+For posting a property into the website
+
+The body which consists of the details about the property for uploading a property into the database using the `POST` for the `/properties` Endpoint. 
+```json
+        "title": "Green sea.",
+        "type": "Bungalow",
+        "price": 23825834,
+        "state": "Tamil Nadu",
+        "city": "Coimbatore",
+        "areaSqFt": 4102,
+        "bedrooms": 5,
+        "bathrooms": 2,
+        "amenities": [
+            "lift",
+            "clubhouse",
+            "security",
+            "gym",
+            "garden",
+            "pool"
+        ],
+        "availableFrom": "2025-10-14T00:00:00.000Z",
+        "tags": [
+            "gated-community",
+            "corner-plot"
+        ],
+        "colorTheme": "#6ab45e",
+        "rating": 4.7,
+        "isVerified": false,
+        "listingType": "rent",
+        "createdBy": "683b3fcc345667d885ed5653",
+        "__v": 0,
+        "createdAt": "2025-05-31T17:43:41.790Z",
+        "updatedAt": "2025-05-31T17:43:41.790Z"
+    },
+   ```
 
 ### ❤️ Favorites Routes
 
@@ -166,7 +209,7 @@ All `/properties` filters also apply to `/favorites`.
 
 ```json
 {
-  "propertyId": "64e6a48c1a23aa5a..."
+  "propId": "64e6a48c1a23aa5a..."
 }
 ```
 
@@ -182,8 +225,8 @@ All `/properties` filters also apply to `/favorites`.
 
 ```json
 {
-  "recipientEmail": "jane@example.com",
-  "propertyId": "64e6a48c1a23aa5a..."
+  "to": "jane@example.com",
+  "property": "64e6a48c1a23aa5a..."
 }
 ```
 
