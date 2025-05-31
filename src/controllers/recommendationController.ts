@@ -4,7 +4,7 @@ import { AuthedRequest } from "../middleware/auth.js";
 import { Response } from "express";
 import { Types } from "mongoose";
 
-// Define a proper type for recommendations
+// Define a proper type for recommendations 
 interface Recommendation {
     from?: String;
     to?: String;
