@@ -1,0 +1,16 @@
+express
+typescript
+ts-node
+ts-node-dev
+mongoose
+dotenv
+cors
+jsonwebtoken
+bcryptjs
+ioredis
+csvtojson
+@types/express
+@types/node
+@types/cors
+@types/jsonwebtoken
+@types/bcryptjs
