@@ -26,23 +26,41 @@ This project is ideal for powering a real estate portal, rental platform, or as 
 - MongoDB instance
 - Redis instance
 
-### 📦 Install Dependencies
+### 📦 Installation
+#### 1. Clone the repository:
 
 ```bash
-npm install
+git clone https://github.com/sathvikak255/Property-Listing-System.git
+cd Property-Listing-System
+```
+#### 2. Install dependencies:
+
+```bash
+npm install -r requirements.txt
 ```
 
-### 🗃 Import CSV Data into MongoDB
+#### 3. Set up environment variables:
+
+Create a .env file in the root directory and add the following:
+
+```.env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+REDIS_URL=your_redis_connection_string
+```
+
+#### 4. Import CSV Data into MongoDB
 
 Use a CSV parser or script to import your dataset into MongoDB. You can either write a custom import script using csv-parser or use an existing command-line tool. Ensure the schema matches your Property model.
 
 Example (Node-based custom script):
 
 ```bash
-npm run import:csv
+ts-node src/utils/seed.ts
 ```
 
-### 🚀 Start Development Server
+#### 5. Start Development Server
 
 Run the development server using:
 
