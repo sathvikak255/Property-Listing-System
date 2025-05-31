@@ -79,13 +79,17 @@ Make requests to http://localhost:5000.
 ## 📌 Routes and Usage
 
 ### 🔐 Authentication Routes
+User authentication is implemented using JWT tokens to ensure secure access to protected endpoints. Users must first register with basic details and then log in to receive a token, which must be included in the header of all authorized requests.
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/register` | POST | Register new user (requires name, email, password) |
 | `/login` | POST | Login existing user and receive JWT token |
 
-**Register Example:**
+⚠️ Include this in headers for all protected routes:
+`Authorization: Bearer <your_token_here>`
+
+**Register Payload:**
 
   ```json
   {
@@ -95,7 +99,7 @@ Make requests to http://localhost:5000.
   }
 ```
 
-**Login Example**
+**Login Payload**
   ```json
   {
     "email": "alice@example.com",
@@ -110,6 +114,7 @@ All protected routes require this header:
 ```
 
 ### 🏘️ Property Routes
+These routes allow users to create, view, update, and delete property listings. Only the original creator of a listing can edit or delete it. Filtering capabilities allow users to search based on multiple fields.
 
 | Endpoint | Method | Auth Required | Description |
 |----------|--------|---------------|-------------|
@@ -136,12 +141,11 @@ All protected routes require this header:
 **Example:**
 
   ```http
-  GET /properties?location=Delhi&priceMin=60000&bedrooms=2
+  GET /properties?location=Delhi&bedrooms=2&rating_gte=4
   GET /properties?rating=4-4.5&location=Chennai
 ```
-For posting a property into the website
-
-The body which consists of the details about the property for uploading a property into the database using the `POST` for the `/properties` Endpoint. 
+### 📤 Create Property Example Payload
+When creating a listing, the following format must be used. The body which consists of the details about the property for uploading a property into the database using the `POST` for the `/properties` Endpoint. 
   ```json
         "title": "Green sea.",
         "type": "Bungalow",
@@ -176,6 +180,7 @@ The body which consists of the details about the property for uploading a proper
    ```
 
 ### ❤️ Favorites Routes
+Users can bookmark or "favorite" listings they like. This allows quick access to preferred properties and supports all filter options available in `/properties`.
 
 | Endpoint | Method | Auth Required | Description |
 |----------|--------|---------------|-------------|
@@ -183,8 +188,6 @@ The body which consists of the details about the property for uploading a proper
 | `/favorites` | POST | ✅ | Add a property to your favorites |
 | `/favorites/:id` | DELETE | ✅ | Remove a property from your favorites |
 
-**Favorites Filtering:**
-All `/properties` filters also apply to `/favorites`.
 
 **Add Favorite Example:**
 
@@ -194,7 +197,11 @@ All `/properties` filters also apply to `/favorites`.
   }
 ```
 
+**Favorites Filtering:**
+All `/properties` filters also apply to `/favorites`.
+
 ### 📩 Recommendation Routes
+This feature allows users to recommend listings to friends or family who are also registered on the platform. These appear in the "Recommendations Received" section of the receiver’s dashboard. This also allows us to view the recommendations sent as well as received.
 
 | Endpoint | Method | Auth Required | Description |
 |----------|--------|---------------|-------------|
@@ -211,16 +218,14 @@ All `/properties` filters also apply to `/favorites`.
   }
 ```
 
-Recommendations are saved to the receiver's profile in a "Recommendations Received" section.
-
 ---
 
 ## ⚡ Redis Caching
 
-- Cached endpoints: `/properties`, `/favorites`
-- Automatic invalidation on POST, PUT, DELETE
-- Helps reduce MongoDB read operations
-- Improves performance for frequent searches
+To improve speed and reduce MongoDB load, Redis caching is implemented for high-traffic routes like `/properties` and `/favorites`.
+- GET requests are cached for faster repeated access.
+- Any change via POST, PUT, or DELETE automatically invalidates and updates the cache.
+- Enhances scalability for larger datasets or frequent user queries.
 
 ---
 
@@ -247,6 +252,3 @@ Ensure to configure your `.env` variables in the deployment settings.
 
 ---
 
-## 📄 License
-
-MIT © 2025 – [Your Name]
