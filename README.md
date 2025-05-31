@@ -162,7 +162,7 @@ These routes allow users to create, view, update, and delete property listings. 
 
 **Example:**
 
-```http
+```url
   GET /properties?location=Delhi&bedrooms=2&rating_gte=4
   GET /properties?rating=4-4.5&location=Chennai
 ```
@@ -173,6 +173,7 @@ These routes allow users to create, view, update, and delete property listings. 
 ### 📤 Create Property Example Payload
 When creating a listing, the following format must be used. The body which consists of the details about the property for uploading a property into the database using the `POST` for the `/properties` Endpoint. 
   ```json
+  {
         "title": "Green sea.",
         "type": "Bungalow",
         "price": 23825834,
@@ -182,7 +183,7 @@ When creating a listing, the following format must be used. The body which consi
         "bedrooms": 5,
        ...
         "listingType": "rent"
-    },
+    }
    ```
 Using `curl` command
 ```bash
