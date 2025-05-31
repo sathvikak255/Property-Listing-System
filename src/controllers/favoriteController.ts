@@ -7,8 +7,6 @@ import { Types } from "mongoose";
 import Favorite from "../models/Favorite.ts";
 import mongoose from "mongoose";
 
-// Add property to favorites
-
 export const addFavorite = async (req: AuthedRequest, res: Response): Promise<void> => {
   try {
     const { propId } = req.body;
