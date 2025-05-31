@@ -1,4 +1,4 @@
-import User from "../models/User.ts";
+import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
