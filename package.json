@@ -10,7 +10,7 @@
     "build": "tsc && tsc-alias && cp dataset.csv dist\\",
     "start": "node dist/index.js",
     "seed": "node dist/utils/seed.js",
-    "postinstall": "npm run seed",
+    "postinstall": "npm run seed"
   },
   "keywords": [],
   "author": "",
